@@ -222,7 +222,7 @@ export default function AdminDashboard({ session }) {
               <h2 style={sectionTitleStyle}>Quản lý liên kết</h2>
               
               {/* Add New Link */}
-              <form onSubmit={addLink} style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.5rem', background: 'rgba(0,0,0,0.15)', padding: '1rem', borderRadius: '12px' }}>
+              <form onSubmit={addLink} style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.5rem', background: 'rgba(199, 164, 246, 0.1)', padding: '1rem', borderRadius: '12px', border: '1px solid rgba(199, 164, 246, 0.2)' }}>
                 <div style={{ flex: '1 1 180px' }}>
                   <input required style={inputStyle} type="text" placeholder="Tiêu đề" value={newLink.title} onChange={e => setNewLink({...newLink, title: e.target.value})} />
                 </div>
@@ -323,9 +323,10 @@ const headerStyle = {
 };
 
 const headerBtnStyle = {
-  padding: '0.5rem', background: 'rgba(0,0,0,0.15)', border: '1px solid var(--glass-border)',
+  padding: '0.55rem', background: 'var(--bg-secondary)', border: '1px solid var(--glass-border)',
   borderRadius: '10px', color: 'var(--text-primary)', cursor: 'pointer', display: 'flex',
-  alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s ease'
+  alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s ease',
+  boxShadow: '0 2px 10px rgba(199, 164, 246, 0.08)'
 };
 
 const cardStyle = {
@@ -342,23 +343,24 @@ const sectionTitleStyle = {
 const labelStyle = { display: 'block', marginBottom: '0.35rem', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '400' };
 
 const inputStyle = {
-  width: '100%', padding: '0.7rem 1rem', borderRadius: '10px',
-  border: '1px solid var(--glass-border)', background: 'rgba(0,0,0,0.15)',
+  width: '100%', padding: '0.75rem 1rem', borderRadius: '12px',
+  border: '1.5px solid rgba(199, 164, 246, 0.2)', background: 'var(--bg-secondary)',
   color: 'var(--text-primary)', fontFamily: 'var(--font-sans)', fontSize: '0.95rem', outline: 'none',
-  transition: 'border-color 0.3s ease'
+  transition: 'all 0.3s ease', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)'
 };
 
 const primaryBtnStyle = {
-  background: 'var(--gradient-accent)', color: '#0a0d14', border: 'none',
-  padding: '0.7rem 1.5rem', borderRadius: '10px', fontWeight: '600', cursor: 'pointer',
+  background: 'var(--gradient-accent)', color: '#ffffff', border: 'none',
+  padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '600', cursor: 'pointer',
   fontFamily: 'var(--font-sans)', fontSize: '0.95rem', alignSelf: 'flex-start',
-  transition: 'transform 0.3s ease'
+  transition: 'transform 0.3s ease', boxShadow: '0 4px 15px rgba(199, 164, 246, 0.4)'
 };
 
 const linkItemStyle = {
   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-  background: 'rgba(0,0,0,0.1)', padding: '0.85rem', borderRadius: '10px',
-  border: '1px solid var(--glass-border)', transition: 'background 0.3s ease'
+  background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '12px',
+  border: '1.5px solid rgba(199, 164, 246, 0.2)', transition: 'all 0.3s ease',
+  boxShadow: '0 2px 10px rgba(199, 164, 246, 0.05)'
 };
 
 const deleteBtnStyle = {
