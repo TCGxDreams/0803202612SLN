@@ -1,0 +1,498 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Holographic Pastel Theme (Light default) */
+  --bg-primary: #f8f5f2;
+  --bg-secondary: #ffffff;
+  --text-primary: #2a2a2a;
+  --text-secondary: #8a8a8a;
+  --accent-primary: #b794f6;
+  --accent-secondary: #f6a4b8;
+  
+  /* Holographic gradients */
+  --gradient-bg: linear-gradient(160deg, #fef0e4 0%, #fce4ec 25%, #e8d5f5 50%, #d5e5f8 75%, #fef0e4 100%);
+  --gradient-accent: linear-gradient(135deg, #c7a4f6 0%, #f6a4b8 50%, #94b8f6 100%);
+  --gradient-accent-hover: linear-gradient(135deg, #d4b4ff 0%, #ffb4c8 50%, #a4c8ff 100%);
+  
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(199, 164, 246, 0.2);
+  --glass-shadow: 0 4px 24px rgba(183, 148, 246, 0.08);
+  --glass-hover: rgba(199, 164, 246, 0.1);
+  
+  /* Typography */
+  --font-sans: 'Be Vietnam Pro', sans-serif;
+  --font-display: 'Be Vietnam Pro', sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #12101a;
+  --bg-secondary: #1a1826;
+  --text-primary: #f0ecf8;
+  --text-secondary: #8880a0;
+  --gradient-bg: linear-gradient(160deg, #12101a 0%, #1a1028 25%, #181525 50%, #101520 75%, #12101a 100%);
+  --glass-bg: rgba(26, 24, 38, 0.8);
+  --glass-border: rgba(199, 164, 246, 0.12);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --glass-hover: rgba(199, 164, 246, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--gradient-bg);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  transition: background 0.6s ease, color 0.4s ease;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================ */
+/* Background Animated Orbs (Holographic)       */
+/* ============================================ */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: -1;
+  opacity: 0.45;
+  animation: float 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(246, 180, 208, 0.5) 0%, transparent 70%);
+  top: -120px;
+  left: -120px;
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(148, 184, 246, 0.5) 0%, transparent 70%);
+  bottom: -100px;
+  right: -100px;
+  animation-delay: -7s;
+}
+
+.orb-3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(199, 164, 246, 0.4) 0%, transparent 70%);
+  top: 40%;
+  left: 60%;
+  animation-delay: -14s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, 50px) scale(1.05); }
+  66% { transform: translate(-30px, 70px) scale(0.96); }
+  100% { transform: translate(20px, -30px) scale(1.02); }
+}
+
+/* ============================================ */
+/* Main App Container                           */
+/* ============================================ */
+.app-container {
+  width: 100%;
+  max-width: 393px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================ */
+/* Content Card (White background panel)        */
+/* ============================================ */
+.content-card {
+  width: 100%;
+  background: var(--bg-secondary);
+  border-radius: 24px;
+  padding: 2.5rem 2rem 3rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+
+/* ============================================ */
+/* Theme Toggle                                 */
+/* ============================================ */
+.theme-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 20px rgba(199, 164, 246, 0.2);
+}
+
+/* ============================================ */
+/* Profile Section                              */
+/* ============================================ */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.profile-avatar-outer {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  padding: 3px;
+  position: relative;
+  animation: avatarGlow 4s infinite ease-in-out;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--bg-primary);
+  background: var(--bg-secondary);
+}
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.profile-bio {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 85%;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ============================================ */
+/* Links Container                              */
+/* ============================================ */
+.links-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+/* ============================================ */
+/* Link Button                                  */
+/* ============================================ */
+.link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.1rem 1.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(199, 164, 246, 0.3);
+  border-radius: 14px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 2px 12px rgba(199, 164, 246, 0.08);
+  opacity: 0;
+  animation: slideUpFade 0.5s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.link-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--glass-hover), transparent);
+  transition: left 0.5s ease;
+}
+
+.link-button:hover::before {
+  left: 100%;
+}
+
+.link-button:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: var(--accent-primary);
+  box-shadow: 0 10px 35px rgba(199, 164, 246, 0.15);
+  background: var(--glass-hover);
+}
+
+.link-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.link-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.link-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--gradient-accent);
+  color: white;
+  flex-shrink: 0;
+}
+
+.link-arrow {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+  color: var(--accent-primary);
+}
+
+.link-button:hover .link-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================ */
+/* Copy Link Button                             */
+/* ============================================ */
+.copy-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.2rem;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.copy-link-btn:hover {
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  background: var(--glass-hover);
+}
+
+.copy-link-btn.copied {
+  color: #22c55e;
+  border-color: #22c55e;
+}
+
+/* ============================================ */
+/* Branding Footer                              */
+/* ============================================ */
+.branding-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--glass-border);
+  text-align: center;
+  width: 100%;
+}
+
+.branding-footer span {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  opacity: 0.5;
+}
+
+.branding-footer strong {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* ============================================ */
+/* Animations                                   */
+/* ============================================ */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes avatarGlow {
+  0% { box-shadow: 0 0 0 0 rgba(199, 164, 246, 0.35); }
+  50% { box-shadow: 0 0 20px 5px rgba(199, 164, 246, 0.15); }
+  100% { box-shadow: 0 0 0 0 rgba(199, 164, 246, 0.35); }
+}
+
+/* ============================================ */
+/* Responsive                                   */
+/* ============================================ */
+@media (min-width: 1200px) {
+  .app-container {
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1.5rem 1rem;
+  }
+
+  .app-container {
+    max-width: 460px;
+    gap: 1.5rem;
+  }
+
+  .profile-avatar-outer {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+  }
+
+  .profile-bio {
+    font-size: 0.9rem;
+    max-width: 90%;
+  }
+
+  .link-button {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1rem 0.75rem;
+  }
+
+  .app-container {
+    max-width: 100%;
+    gap: 1.25rem;
+  }
+
+  .profile-container {
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .profile-avatar-outer {
+    width: 88px;
+    height: 88px;
+    padding: 2.5px;
+  }
+
+  .profile-avatar {
+    border-width: 2.5px;
+  }
+
+  .profile-name {
+    font-size: 1.3rem;
+  }
+
+  .profile-bio {
+    font-size: 0.85rem;
+    max-width: 95%;
+  }
+
+  .links-container {
+    gap: 0.6rem;
+  }
+
+  .link-button {
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+
+  .link-icon-container {
+    width: 32px;
+    height: 32px;
+  }
+
+  .copy-link-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .bg-orb {
+    opacity: 0.25;
+  }
+
+  .orb-1 { width: 280px; height: 280px; }
+  .orb-2 { width: 240px; height: 240px; }
+}
+
+@media (max-width: 360px) {
+  .profile-name { font-size: 1.15rem; }
+  .link-button { padding: 0.75rem 0.85rem; font-size: 0.85rem; }
+}
