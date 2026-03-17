@@ -144,8 +144,8 @@ body {
 /* ============================================ */
 .theme-toggle {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1.25rem;
+  right: 1.25rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   color: var(--text-secondary);
