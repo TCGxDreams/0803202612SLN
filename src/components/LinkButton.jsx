@@ -85,25 +85,8 @@ const platformIcons = {
   ),
 };
 
-// Platform color mappings
-const platformColors = {
-  instagram: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
-  facebook: '#1877F2',
-  tiktok: '#000000',
-  youtube: '#FF0000',
-  twitter: '#000000',
-  github: '#333333',
-  linkedin: '#0A66C2',
-  spotify: '#1DB954',
-  telegram: '#26A5E4',
-  discord: '#5865F2',
-  pinterest: '#E60023',
-  whatsapp: '#25D366',
-  email: 'linear-gradient(135deg, #c7a4f6, #f6a4b8)',
-  phone: 'linear-gradient(135deg, #22c55e, #16a34a)',
-  zalo: '#0068FF',
-  globe: 'var(--gradient-accent)',
-};
+// All icons use holographic gradient matching the page theme
+const holoGradient = 'linear-gradient(135deg, #fde1c4 0%, #f6b4d0 25%, #c7a4f6 50%, #94b8f6 75%, #c7d4f6 100%)';
 
 // Detect platform from URL
 function detectPlatform(url) {
@@ -132,13 +115,10 @@ function detectPlatform(url) {
 const LinkButton = ({ title, url, index }) => {
   const platform = detectPlatform(url);
   const icon = platformIcons[platform] || platformIcons.globe;
-  const bgColor = platformColors[platform] || platformColors.globe;
 
   const style = {
     animationDelay: `${0.1 + (index * 0.1)}s`
   };
-
-  const iconBg = bgColor.includes('gradient') ? { background: bgColor } : { background: bgColor };
 
   return (
     <a
@@ -149,7 +129,7 @@ const LinkButton = ({ title, url, index }) => {
       style={style}
     >
       <div className="link-content">
-        <div className="link-icon-container" style={iconBg}>
+        <div className="link-icon-container" style={{ background: holoGradient }}>
           {icon}
         </div>
         <span>{title}</span>
