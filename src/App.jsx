@@ -12,29 +12,35 @@ function App() {
   const [isRecovery, setIsRecovery] = useState(false);
 
   useEffect(() => {
-    if (supabase) {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        setSession(session);
-        setLoading(false);
-      });
-
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange((event, session) => {
-        setSession(session);
-        if (event === 'PASSWORD_RECOVERY') {
-          setIsRecovery(true);
-        }
-      });
-
-      return () => subscription.unsubscribe();
-    } else {
+    if (!supabase) {
       setLoading(false);
+      return;
     }
+
+    // Check URL hash for recovery token BEFORE session loads
+    const hash = window.location.hash;
+    if (hash && hash.includes('type=recovery')) {
+      setIsRecovery(true);
+    }
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session);
+
+      if (event === 'PASSWORD_RECOVERY') {
+        setIsRecovery(true);
+      }
+
+      // Only stop loading after first auth event
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   if (loading) {
-    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'white' }}>Loading...</div>;
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'var(--text-secondary)' }}>Loading...</div>;
   }
 
   return (
