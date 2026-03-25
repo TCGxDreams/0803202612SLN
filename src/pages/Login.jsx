@@ -17,7 +17,7 @@ export default function Login() {
     setLoading(true);
     setError(null);
     setSuccess(null);
-    
+
     if (!supabase) {
       setError("Supabase client not initialized.");
       setLoading(false);
@@ -39,7 +39,7 @@ export default function Login() {
     setLoading(true);
     setError(null);
     setSuccess(null);
-    
+
     if (!supabase) {
       setError("Supabase client not initialized.");
       setLoading(false);
@@ -85,12 +85,12 @@ export default function Login() {
       <div className="bg-orb orb-1"></div>
       <div className="bg-orb orb-2"></div>
       <div className="bg-orb orb-3"></div>
-      
+
       <div className="app-container" style={{ justifyContent: 'center', minHeight: '85vh' }}>
-        <div style={{ 
-          background: 'var(--glass-bg)', 
-          padding: '2.5rem 2rem', 
-          borderRadius: '20px', 
+        <div style={{
+          background: 'var(--glass-bg)',
+          padding: '2.5rem 2rem',
+          borderRadius: '20px',
           border: '1px solid var(--glass-border)',
           width: '100%',
           maxWidth: '420px',
@@ -98,9 +98,9 @@ export default function Login() {
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)'
         }}>
-          <h1 style={{ 
-            fontFamily: 'var(--font-display)', 
-            marginBottom: '0.25rem', 
+          <h1 style={{
+            fontFamily: 'var(--font-display)',
+            marginBottom: '0.25rem',
             textAlign: 'center',
             fontSize: '1.8rem',
             fontWeight: '800',
@@ -114,7 +114,7 @@ export default function Login() {
           <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '2rem', fontSize: '0.85rem', fontWeight: '300' }}>
             {showChangePassword ? 'Nhập email để đặt lại mật khẩu' : 'Đăng nhập để quản lý links'}
           </p>
-          
+
           <form style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
             <input
               type="email"
@@ -134,21 +134,21 @@ export default function Login() {
                 style={inputStyle}
               />
             )}
-            
+
             {error && <p style={{ color: '#ef4444', fontSize: '0.85rem', textAlign: 'center', margin: '0.25rem 0' }}>{error}</p>}
             {success && <p style={{ color: '#22c55e', fontSize: '0.85rem', textAlign: 'center', margin: '0.25rem 0' }}>{success}</p>}
-            
+
             {showChangePassword ? (
               <>
-                <button 
-                  onClick={handleChangePassword} 
+                <button
+                  onClick={handleChangePassword}
                   disabled={loading}
                   style={{ ...buttonStyle, background: 'var(--gradient-accent)', color: '#0a0d14' }}
                 >
                   <KeyRound size={16} />
                   {loading ? 'Đang gửi...' : 'Gửi link đổi mật khẩu'}
                 </button>
-                <button 
+                <button
                   onClick={(e) => { e.preventDefault(); setShowChangePassword(false); setError(null); setSuccess(null); }}
                   style={{ ...buttonStyle, background: 'transparent', border: '1px solid var(--glass-border)', color: 'var(--text-primary)' }}
                 >
@@ -157,17 +157,17 @@ export default function Login() {
               </>
             ) : (
               <>
-                <button 
-                  onClick={handleLogin} 
+                <button
+                  onClick={handleLogin}
                   disabled={loading}
                   style={{ ...buttonStyle, background: 'var(--gradient-accent)', color: '#0a0d14' }}
                 >
                   <LogIn size={16} />
                   {loading ? 'Đang xử lý...' : 'Đăng nhập'}
                 </button>
-                
-                <button 
-                  onClick={handleSignUp} 
+
+                <button
+                  onClick={handleSignUp}
                   disabled={loading}
                   style={{ ...buttonStyle, background: 'transparent', border: '1px solid var(--glass-border)', color: 'var(--text-primary)' }}
                 >
@@ -175,13 +175,13 @@ export default function Login() {
                   Đăng ký
                 </button>
 
-                <button 
+                <button
                   onClick={(e) => { e.preventDefault(); setShowChangePassword(true); setError(null); setSuccess(null); }}
-                  style={{ 
-                    background: 'none', 
-                    border: 'none', 
-                    color: 'var(--text-secondary)', 
-                    cursor: 'pointer', 
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--text-secondary)',
+                    cursor: 'pointer',
                     fontSize: '0.85rem',
                     fontFamily: 'var(--font-sans)',
                     marginTop: '0.5rem',

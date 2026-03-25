@@ -4,13 +4,14 @@ import { supabase } from './lib/supabase';
 import PublicProfile from './pages/PublicProfile';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isRecovery, setIsRecovery] = useState(false);
 
   useEffect(() => {
-    // Only try to fetch session if supabase is actually configured
     if (supabase) {
       supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session);
@@ -19,8 +20,11 @@ function App() {
 
       const {
         data: { subscription },
-      } = supabase.auth.onAuthStateChange((_event, session) => {
+      } = supabase.auth.onAuthStateChange((event, session) => {
         setSession(session);
+        if (event === 'PASSWORD_RECOVERY') {
+          setIsRecovery(true);
+        }
       });
 
       return () => subscription.unsubscribe();
@@ -36,7 +40,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={session ? <Navigate to="/admin" replace /> : <Login />} />
+        <Route path="/" element={
+          isRecovery ? <Navigate to="/reset-password" replace /> :
+          session ? <Navigate to="/admin" replace /> : <Login />
+        } />
+        <Route path="/reset-password" element={
+          isRecovery || session ? <ResetPassword /> : <Navigate to="/" replace />
+        } />
         <Route path="/admin" element={session ? <AdminDashboard session={session} /> : <Navigate to="/" replace />} />
         <Route path="/:username" element={<PublicProfile />} />
       </Routes>
